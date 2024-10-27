@@ -1,0 +1,14 @@
+[package]
+name = "glib-proc-macro-test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gio = "0.20.4"
+glib = "0.20.4"
+syn = { version = "2.0.85", features=["full", "extra-traits", "parsing"] }
+
+[lib]
+proc-macro = true
