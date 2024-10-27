@@ -52,7 +52,20 @@ fn create_additional_item_impl_stream(methods: &Vec<TaggedMethod>) -> proc_macro
 fn create_variant_callable_item_impl_stream(
     methods: &Vec<TaggedMethod>,
 ) -> proc_macro2::TokenStream {
-    quote! {}
+    let method_idents = methods.iter().map(|m| m.ident.clone());
+    let additional_method_idents = methods
+        .iter()
+        .map(|m| quote::format_ident!("{}_variant", m.ident));
+    quote! {
+        impl VariantCallable for Greeter {
+            fn call_method(&mut self, method: &str, args: glib::Variant) -> glib::Variant {
+                match method {
+                    #(#method_idents => self.#additional_method_idents(args)),*,
+                    _ => panic!(),
+                }
+            }
+        }
+    }
 }
 
 struct TaggedMethod {

@@ -24,16 +24,6 @@ impl Greeter {
     }
 }
 
-impl VariantCallable for Greeter {
-    fn call_method(&mut self, method: &str, args: glib::Variant) -> glib::Variant {
-        match method {
-            "hello" => self.hello_variant(args),
-            "add" => self.add_variant(args),
-            _ => panic!(),
-        }
-    }
-}
-
 fn main() {
     let mut greeter = Greeter{};
     let args = ToVariant::to_variant(&("fuad",));
