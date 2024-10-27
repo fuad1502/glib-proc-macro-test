@@ -163,6 +163,8 @@ version = "0.1.0"
 dependencies = [
  "gio",
  "glib",
+ "proc-macro2",
+ "quote",
  "syn",
 ]
 
